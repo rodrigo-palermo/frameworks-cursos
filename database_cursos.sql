@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `profile` (
 CREATE TABLE IF NOT EXISTS `user` (
                                          `id` int(3) NOT NULL AUTO_INCREMENT,
                                          `id_perfil` int(3) NOT NULL,
-                                         `login` varchar(20) COLLATE utf8_general_ci NOT NULL,
+                                         `email` varchar(40) COLLATE utf8_general_ci NOT NULL,
                                          `senha` varchar(20) COLLATE utf8_general_ci NOT NULL,
                                          `nome` varchar(100) COLLATE utf8_general_ci NOT NULL,
                                          `data_inscricao` date NOT NULL,

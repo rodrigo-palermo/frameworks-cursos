@@ -8,9 +8,10 @@ class Profile_model extends CI_Model
         $this->load->database();
     }
 
-    public function get_profile()
+    public function get_profiles()
     {
         $query = $this->db->get('profile');
         return $query->result_array();
     }
+
 }

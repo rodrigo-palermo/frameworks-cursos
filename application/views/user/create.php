@@ -4,18 +4,12 @@
 
 <?php echo form_open('user/create'); ?>
 
-<?php $profile = $this->load->model('Profile_model');?>
-
 <div class="form-group">
-    <label for="perfil">Perfil</label>
-    <select name="perfil" autofocus>
-<!--        <option value="adm">Administrador</option>-->
-<!--        <option value="prof">Professor</option>-->
-<!--        <option value="aluno">Aluno</option>-->
-    <?php foreach ($profile->get_profile() as $p){
-        echo "<option value=";
-    }
-    ?>
+    <label for="id_perfil">Perfil</label>
+    <select name="id_perfil" autofocus>
+    <?php foreach ($profiles as $p){
+        echo '<option value='.$p['id'].'>'.$p['nome'].'</option>'.PHP_EOL;
+    }?>
     </select>
 </div>
 <div class="form-group">
@@ -27,8 +21,8 @@
     <input type="email" name="email">
 </div>
 <div class="form-group">
-    <label for="password">Senha</label>
-    <input type="password" name="password">
+    <label for="senha">Senha</label>
+    <input type="password" name="senha">
 </div>
 
 <input class="btn btn-primary" type="submit" name="submit" value="Cadastrar">

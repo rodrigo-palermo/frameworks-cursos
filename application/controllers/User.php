@@ -14,13 +14,16 @@ class User extends CI_Controller
     {
         $this->load->helper('form');
         $this->load->library('form_validation');
+        $this->load->model('profile_model');
+
+        $data['profiles'] = $this->profile_model->get_profiles();
 
         $data['title'] = 'Cadastro de usuário';
 
-        $this->form_validation->set_rules('perfil', 'Perfil', 'required');
+        $this->form_validation->set_rules('id_perfil', 'Perfil', 'required');
         $this->form_validation->set_rules('nome', 'Nome', 'required');
         $this->form_validation->set_rules('email', 'E-mail', 'required');
-        $this->form_validation->set_rules('password', 'Senha', 'required');
+        $this->form_validation->set_rules('senha', 'Senha', 'required');
 
         if ($this->form_validation->run() === FALSE)
         {
@@ -31,8 +34,9 @@ class User extends CI_Controller
         }
         else
         {
-            $this->user_model->set();
-            //$this->load->view('user/success');
+            $this->user_model->set_user();
+            $this->load->view('user/success');
         }
     }
+
 }
