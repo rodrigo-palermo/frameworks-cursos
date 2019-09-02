@@ -1,10 +1,12 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pages extends CI_Controller {
+
+class Home extends CI_Controller {
 
     public function view($page = 'home')
     {
-        if(!file_exists(APPPATH.'views/pages/'.$page.'.php')) {
+        if(!file_exists(APPPATH.'views/home/'.$page.'.php')) {
             //This page does not exists
             show_404();
         }
@@ -12,7 +14,7 @@ class Pages extends CI_Controller {
         $data['title'] = ucfirst($page);
 
         $this->load->view('templates/header', $data);
-        $this->load->view('pages/'.$page, $data);
+        $this->load->view('home/'.$page, $data);
         $this->load->view('templates/footer', $data);
 
     }

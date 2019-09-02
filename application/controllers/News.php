@@ -60,6 +60,13 @@ class News extends CI_Controller {
             $this->load->view('news/success');
         }
     }
+
+    public function test($type=null,$id=null) {
+        echo "This is a test.";
+        if ($type != null) {
+            echo "(".$type.")"."(".$id.")";
+        }
+    }
 }
 {
 
