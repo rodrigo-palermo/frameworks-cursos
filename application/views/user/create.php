@@ -7,8 +7,8 @@
 <div class="form-group">
     <label for="id_perfil">Perfil</label>
     <select name="id_perfil" autofocus>
-    <?php foreach ($profiles as $p){
-        echo '<option value='.$p['id'].'>'.$p['nome'].'</option>'.PHP_EOL;
+    <?php foreach ($profiles as $profiles_item){
+        echo '<option value='.$profiles_item['id'].'>'.$profiles_item['nome'].'</option>'.PHP_EOL;
     }?>
     </select>
 </div>
