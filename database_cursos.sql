@@ -19,7 +19,8 @@ CREATE TABLE IF NOT EXISTS `profile` (
 --
 -- Estrutura da tabela `user`
 --
-
+--
+;
 CREATE TABLE IF NOT EXISTS `user` (
                                          `id` int(3) NOT NULL AUTO_INCREMENT,
                                          `id_perfil` int(3) NOT NULL,

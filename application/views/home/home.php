@@ -2,11 +2,10 @@
 <h2>Visão geral</h2>
 
 <ul>
-    <li><?php echo anchor('user/create','Cadastro de Usuários')?></li>
+    <li>Usuários</li>
     <ol>
-        <li>Administrador</li>
-        <li>Professor</li>
-        <li>Aluno</li>
+		<li><?php echo anchor('user/create','Cadastro')?></li>
+		<li><?php echo anchor('user/view','Lista')?></li>
     </ol>
     <li>Cadastro de Itens</li>
     <ol>
@@ -16,7 +15,6 @@
         <li>Avaliação</li>
         <li>Boletim</li>
     </ol>
-
 </ul>
 
 

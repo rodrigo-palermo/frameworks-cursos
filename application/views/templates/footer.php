@@ -1,4 +1,5 @@
     </div>
+	<?php $_SESSION['acao_atual'] = current_url();?>
 </main>
 <footer class="footer bg-dark ">
     <!-- Copyright -->

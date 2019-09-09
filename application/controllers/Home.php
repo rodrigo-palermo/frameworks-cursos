@@ -16,6 +16,7 @@ class Home extends CI_Controller {
         $this->load->view('templates/header', $data);
         $this->load->view('home/'.$page, $data);
         $this->load->view('templates/footer', $data);
+        $this->output->enable_profiler(TRUE);
 
     }
 }

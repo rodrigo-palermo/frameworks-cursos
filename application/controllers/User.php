@@ -39,14 +39,14 @@ class User extends CI_Controller
         }
     }
 
-    public function list()
+    public function view()
     {
         $data['title'] = 'Lista de Usuários';
 
         $data['users'] = $this->user_model->get_users();
         
         $this->load->view('templates/header', $data);
-        $this->load->view('user/list');
+        $this->load->view('user/view');
         $this->load->view('templates/footer');
     }
 
