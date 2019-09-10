@@ -41,7 +41,7 @@ class User extends CI_Controller
 
     public function view()
     {
-        $data['title'] = 'Lista de Usuários';
+        $data['title'] = 'Lista de usuários';
 
         $data['users'] = $this->user_model->get_users();
         

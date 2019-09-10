@@ -7,7 +7,14 @@
 		<li><?php echo anchor('user/create','Cadastro')?></li>
 		<li><?php echo anchor('user/view','Lista')?></li>
     </ol>
-    <li>Cadastro de Itens</li>
+    
+    <li>Perfil de Usuários</li>
+    <ol>
+		<li><?php echo anchor('profile/create','Cadastro')?></li>
+		<li><?php echo anchor('profile/view','Lista')?></li>
+    </ol>
+
+    <li>Itens de cursos</li>
     <ol>
         <li>Curso</li>
         <li>Tópico</li>
