@@ -65,8 +65,10 @@
         <div class="container">
 			<?php
 			//Avoid 'Voltar' button to receive same url when reload/refresh the page
-			if($_SESSION['acao_atual'] != current_url()) {
+			if(isset($_SESSION['acao_atual']) && $_SESSION['acao_atual'] != current_url()) {
 				$_SESSION['acao_origem'] = $_SESSION['acao_atual'];
+			} else {
+				$_SESSION['acao_atual'] = current_url();
 			}
 			//Enable CI Profiler in all pages
 			$this->output->enable_profiler(TRUE);?>
