@@ -6,10 +6,11 @@
 
 <div class="form-group">
     <label for="nome">Nome</label>
-    <input type="input" name="nome">
+    <input type="input" name="nome" value="<?=isset($profile)?$profile['nome']:'';?>">
 </div>
 
-<input class="btn btn-primary" type="submit" name="submit" value="Cadastrar">
+<input type="hidden" name="hdnId" value="<?=isset($profile)?$profile['id']:'';?>">
+<input class="btn btn-primary" type="submit" name="submit" value="<?=isset($profile)?'Atualizar':'Cadastrar';?>">
 <a href="<?php echo $this->session->acao_origem; ?>" class="btn btn-secondary">Voltar</a>
 <li><?php echo anchor('profile/view','Lista')?></li>
 </form>

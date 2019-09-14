@@ -3,12 +3,14 @@
 
 class Profile_model extends CI_Model
 {
+	private $table = 'perfil';
+
     public function __construct()
     {
         $this->load->database();
     }
 
-    public function set_profile()
+    public function set_profile($id = false)
     {
         $this->load->helper('url');
 
@@ -16,13 +18,27 @@ class Profile_model extends CI_Model
             'nome' => $this->input->post('nome'),
         );
 
-        return $this->db->insert('perfil', $data);
+        if($id){
+        	$this->db->where('id',$id);
+        	return $this->db->update($this->table, $data);
+		} else {
+			return $this->db->insert($this->table, $data);
+		}
     }
 
-    public function get_profiles()
+    public function get_profile($id = false)
     {
-        $query = $this->db->get('perfil');
+        if($id){
+        	$this->db->where('id',$id);
+		}
+    	$query = $this->db->get($this->table);
         return $query->result_array();
     }
+
+    public function delete_profile($id)
+	{
+		$this->db->where('id',$id);
+		return $this->db->delete($this->table);
+	}
 
 }
