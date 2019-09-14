@@ -35,7 +35,7 @@ class User extends CI_Controller
         else
         {
             $this->user_model->set_user();
-            $this->load->view('user/success');
+            $this->load->view('templates/success');
         }
     }
 

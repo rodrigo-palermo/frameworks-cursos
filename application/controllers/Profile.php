@@ -15,21 +15,21 @@ class Profile extends CI_Controller {
         $this->load->library('form_validation');
 
         $data['title'] = 'Cadastro de perfil de usuário';
+        $data['tableName'] = 'Perfil de usuário';
 
         $this->form_validation->set_rules('nome', 'Nome', 'required');
 
+		$this->load->view('templates/header', $data);
         if ($this->form_validation->run() === FALSE)
         {
-            $this->load->view('templates/header', $data);
             $this->load->view('profile/create');
-            $this->load->view('templates/footer');
-
         }
         else
         {
             $this->profile_model->set_profile();
-            $this->load->view('profile/success');
+            $this->load->view('templates/success');
         }
+		$this->load->view('templates/footer');
     }
 
     public function view()

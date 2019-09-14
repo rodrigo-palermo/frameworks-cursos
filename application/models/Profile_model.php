@@ -16,12 +16,12 @@ class Profile_model extends CI_Model
             'nome' => $this->input->post('nome'),
         );
 
-        return $this->db->insert('profile', $data);
+        return $this->db->insert('perfil', $data);
     }
 
     public function get_profiles()
     {
-        $query = $this->db->get('profile');
+        $query = $this->db->get('perfil');
         return $query->result_array();
     }
 

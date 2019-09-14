@@ -19,12 +19,12 @@ class User_model extends CI_Model
             'senha' => $this->input->post('senha'),
         );
 
-        return $this->db->insert('user', $data);
+        return $this->db->insert('usuario', $data);
     }
 
     public function get_users()
     {
-        $query = $this->db->get('user');
+        $query = $this->db->get('usuario');
         return $query->result_array();
     }
 }
