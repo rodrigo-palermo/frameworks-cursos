@@ -27,5 +27,4 @@
 
 <input class="btn btn-primary" type="submit" name="submit" value="Cadastrar">
 <a href="<?php echo $this->session->acao_origem; ?>" class="btn btn-secondary">Voltar</a>
-<li><?php echo anchor('user/view','Lista')?></li>
 </form>

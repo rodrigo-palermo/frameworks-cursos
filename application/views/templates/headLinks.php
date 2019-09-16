@@ -16,4 +16,4 @@
 <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
 
 <!-- Other CSS -->
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('style/css/style.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css')?>">
