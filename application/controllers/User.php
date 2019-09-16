@@ -16,7 +16,7 @@ class User extends CI_Controller
         $this->load->library('form_validation');
         $this->load->model('profile_model');
 
-        $data['profiles'] = $this->profile_model->get_profiles();
+        $data['profiles'] = $this->profile_model->get_profile();
 
         $data['title'] = 'Cadastro de usuário';
 

@@ -1,30 +1,66 @@
 <h1>Gerenciador de Cursos Online</h1>
 <h2>Visão geral</h2>
-
-<ul class="list-group">
-    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-		<h4>Usuários</h4>
-    <div class="btn-group">
-		<button type="button" class="btn btn-outline-primary"><?php echo anchor('user/create','Cadastro')?></button>
-		<button type="button" class="btn btn-outline-primary"><?php echo anchor('user/view','Lista')?></button>
-    </div>
-	</li>
-    
-    <li class="list-group-item">Perfil de Usuários</li>
-    <ol>
-		<li><?php echo anchor('profile/create','Cadastro')?></li>
-		<li><?php echo anchor('profile/view','Lista')?></li>
-    </ol>
-
-    <li class="list-group-item">Itens de cursos</li>
-    <ol>
-        <li>Categoria</li>
-        <li>Curso</li>
-        <li>Tópico</li>
-        <li>Atividade</li>
-        <li>Avaliação</li>
-        <li>Boletim</li>
-    </ol>
-</ul>
+<div style="max-width:600px;">
+	<ul class="list-group">
+		<h5>Itens de Usuários</h5>
+		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+			<h6>Perfil</h6>
+			<div class="btn-group">
+				<?php echo anchor('profile/create','Cadastro','class="btn btn-outline-primary"')?>
+				<?php echo anchor('profile/view','Lista','class="btn btn-outline-primary"')?>
+			</div>
+		</li>
+		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+			<h6>Usuários</h6>
+			<div class="btn-group">
+				<?php echo anchor('user/create','Cadastro','class="btn btn-outline-primary"')?>
+				<?php echo anchor('user/view','Lista','class="btn btn-outline-primary"')?>
+			</div>
+		</li>
+		<h5>Itens de cursos</h5>
+		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+			<h6>Categorias</h6>
+			<div class="btn-group">
+				<?php echo anchor('category/create','Cadastro','class="btn btn-outline-primary"')?>
+				<?php echo anchor('category/view','Lista','class="btn btn-outline-primary"')?>
+			</div>
+		</li>
+		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+			<h6>Cursos</h6>
+			<div class="btn-group">
+				<?php echo anchor('course/create','Cadastro','class="btn btn-outline-primary"')?>
+				<?php echo anchor('course/view','Lista','class="btn btn-outline-primary"')?>
+			</div>
+		</li>
+		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+			<h6>Tópicos</h6>
+			<div class="btn-group">
+				<?php echo anchor('topic/create','Cadastro','class="btn btn-outline-primary"')?>
+				<?php echo anchor('topic/view','Lista','class="btn btn-outline-primary"')?>
+			</div>
+		</li>
+		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+			<h6>Atividades</h6>
+			<div class="btn-group">
+				<?php echo anchor('activity/create','Cadastro','class="btn btn-outline-primary"')?>
+				<?php echo anchor('activity/view','Lista','class="btn btn-outline-primary"')?>
+			</div>
+		</li>
+		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+			<h6>Avaliação</h6>
+			<div class="btn-group">
+				<?php echo anchor('test/create','Cadastro','class="btn btn-outline-primary"')?>
+				<?php echo anchor('test/view','Lista','class="btn btn-outline-primary"')?>
+			</div>
+		</li>
+		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+			<h6>Boletim</h6>
+			<div class="btn-group">
+				<?php echo anchor('report/create','Cadastro','class="btn btn-outline-primary"')?>
+				<?php echo anchor('report/view','Lista','class="btn btn-outline-primary"')?>
+			</div>
+		</li>
+	</ul>
+</div>
 
 
