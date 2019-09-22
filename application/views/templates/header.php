@@ -47,7 +47,7 @@
 					<?php
 					if (!isset($_SESSION['autenticado']) || (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] == false)) {
 						$navItemLogin = '<li class="nav-item ">' . PHP_EOL;
-						$navItemLogin .=  anchor('register/index_view', 'Criar conta', 'class="btn btn-outline-success" style="margin-left:5px;"') . PHP_EOL;
+						$navItemLogin .=  anchor('auth/register', 'Criar conta', 'class="btn btn-outline-success" style="margin-left:5px;"') . PHP_EOL;
 						$navItemLogin .= '</li>' . PHP_EOL;
 						print $navItemLogin;
 					}

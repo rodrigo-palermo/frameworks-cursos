@@ -134,12 +134,12 @@ $config['site_title']                 = "cursos-online.com";       // Site Title
 $config['admin_email']                = "avilapalermo@gmail.com"; // Admin Email, admin@example.com
 $config['default_group']              = 'members';           // Default group, use name
 $config['admin_group']                = 'admin';             // Default administrators group, use name
-$config['identity']                   = 'email';             /* You can use any unique column in your table as identity column.
+$config['identity']                   = 'username';             /* You can use any unique column in your table as identity column.
 															    The values in this column, alongside password, will be used for login purposes
 															    IMPORTANT: If you are changing it from the default (email),
 															    		   update the UNIQUE constraint in your DB */
 $config['min_password_length']        = 6;                   // Minimum Required Length of Password (not enforced by lib - see note above)
-$config['email_activation']           = FALSE;               // Email Activation for registration
+$config['email_activation']           = TRUE;               // Email Activation for registration
 $config['manual_activation']          = FALSE;               // Manual Activation for registration
 $config['remember_users']             = TRUE;                // Allow users to be remembered and enable auto-login
 $config['user_expire']                = 86500;               // How long to remember the user (seconds). Set to zero for no expiration - see sess_expiration in CodeIgniter Session Config for session expiration
