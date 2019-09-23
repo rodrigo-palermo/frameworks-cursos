@@ -4,6 +4,10 @@ header {
 	margin-bottom: 10px;
 }
 
+div .login {
+	max-width: 400px;
+}
+
 footer {
 	margin-top: 200px;
 }

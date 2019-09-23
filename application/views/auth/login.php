@@ -1,28 +1,37 @@
-<h1><?php echo lang('login_heading');?></h1>
-<p><?php echo lang('login_subheading');?></p>
+<div class="login">
+<h2>Login</h2>
+<form id="formLogin" action=''> <!--method='post'/-->
+	<div class="form-group">
+		<label for="login"></label>
+		<input type="text" class="form-control" id="login" name="login" placeholder="Usuário" required>
+	</div>
+	<div class="form-group">
+		<label for="senha"></label>
+		<input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required>
+	</div>
+	<div class="form-group">
+		<!-- Variáveis POST para identificar LOGIN -->
+		<input type="text" name="submitEntrar" hidden>
 
-<div id="infoMessage"><?php echo $message;?></div>
+		<input type="submit" class="btn btn-outline-primary" name="submitEntrar" value="Entrar">
+<!--		<button type='button' class='btn btn-outline-success more-vert-margin'>Registrar</button>-->
+	</div>
+</form>
+</div>
 
-<?php echo form_open("auth/login");?>
+<h2><?php echo $title; ?></h2>
 
-  <p>
-    <?php echo lang('login_identity_label', 'identity');?>
-    <?php echo form_input($identity);?>
-  </p>
+<?php echo validation_errors(); ?>
 
-  <p>
-    <?php echo lang('login_password_label', 'password');?>
-    <?php echo form_input($password);?>
-  </p>
+<?php echo form_open('user/create'); ?>
 
-  <p>
-    <?php echo lang('login_remember_label', 'remember');?>
-    <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?>
-  </p>
+<div class="form-group">
+	<label for="username">Username</label>
+	<input type="input" name="username" value="">
+	<label for="password">Senha</label>
+	<input type="input" name="username" value="">
+</div>
 
-
-  <p><?php echo form_submit('submit', lang('login_submit_btn'));?></p>
-
-<?php echo form_close();?>
-
-<p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>
+<input class="btn btn-primary" type="submit" name="submit" value="">
+<a href="<?php echo $this->session->acao_origem; ?>" class="btn btn-secondary">Voltar</a>
+</form>
