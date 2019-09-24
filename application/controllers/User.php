@@ -25,18 +25,18 @@ class User extends CI_Controller
         $this->form_validation->set_rules('email', 'E-mail', 'required');
         $this->form_validation->set_rules('senha', 'Senha', 'required');
 
+        $this->load->view('templates/header', $data);
         if ($this->form_validation->run() === FALSE)
         {
-            $this->load->view('templates/header', $data);
             $this->load->view('user/create');
-            $this->load->view('templates/footer');
-
         }
         else
         {
             $this->user_model->set_user();
+            # todo: feature: verificar se usuario ja existe antes de gravar (ou tratar erro se no banco houver conflito)
             $this->load->view('templates/success');
         }
+        $this->load->view('templates/footer');
     }
 
     public function view()
@@ -56,7 +56,6 @@ class User extends CI_Controller
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		$data['tableName'] = 'user';
 		$data['title'] = 'Login';
 
 		$this->form_validation->set_rules('username', 'Nome de usuário', 'required');
@@ -64,13 +63,18 @@ class User extends CI_Controller
 
 		$this->load->view('templates/header', $data);
 		if($this->form_validation->run() === FALSE) {
-			$this->load->view('auth/login');
+			$this->load->view('user/login');
 		}else {
-			$this->user_model->set_user()
+            #todo: implementar
+			if($this->user_model->auth_user()){
+                $this->load->view('templates/success');
+                //$_SESSION['autenticado'] = TRUE;
+                $this->session->set_userdata('testeName', 'criando uma variavel de sessao teste');
+            }
 		}
 		$this->load->view('templates/footer');
 
-		if (isset($_POST['submitEntrar'])) {
+		/* if (isset($_POST['submitEntrar'])) {
 
 			$login = $_POST['login'];
 			$senha_digitada = $_POST['senha'];
@@ -91,7 +95,13 @@ class User extends CI_Controller
 					http_response_code(500);
 				}
 			}
-		}
-	}
+		} */
+    }
+    
+    public function register()
+    {
+        #todo: mudar se implementar alguma feature diferente de create
+        $this->create();
+    }
 
 }

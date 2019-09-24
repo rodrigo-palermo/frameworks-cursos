@@ -13,7 +13,7 @@
         echo '<tr>'.PHP_EOL;
         echo '<td>'.$users_item['nome'].'</td>'.PHP_EOL;
         echo '<td>'.$users_item['email'].'</td>'.PHP_EOL;
-        echo '<td>'.$users_item['data_inscricao'].'</td>'.PHP_EOL;
+        echo '<td>'.$users_item['dth_inscricao'].'</td>'.PHP_EOL;
         echo '</tr>'.PHP_EOL;
     }?>
     </tbody>

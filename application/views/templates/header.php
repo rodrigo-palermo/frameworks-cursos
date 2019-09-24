@@ -38,7 +38,7 @@
 					if (!isset($_SESSION['autenticado']) || (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] == false)) {
 						$navItemLogin = '<li class="nav-item ">' . PHP_EOL;
 						//$navItemLogin .= '<button id="nav-btn-login" type="button" class="btn btn-outline-info" href="#">LOGIN</button>' . PHP_EOL;
-						$navItemLogin .=  anchor('auth/login', 'Login', 'class="btn btn-outline-info"') . PHP_EOL;
+						$navItemLogin .=  anchor('user/login', 'Login', 'class="btn btn-outline-info"') . PHP_EOL;
 						$navItemLogin .= '</li>' . PHP_EOL;
 						print $navItemLogin;
 					}
@@ -47,7 +47,7 @@
 					<?php
 					if (!isset($_SESSION['autenticado']) || (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] == false)) {
 						$navItemLogin = '<li class="nav-item ">' . PHP_EOL;
-						$navItemLogin .=  anchor('auth/register', 'Criar conta', 'class="btn btn-outline-success" style="margin-left:5px;"') . PHP_EOL;
+						$navItemLogin .=  anchor('user/register', 'Criar conta', 'class="btn btn-outline-success" style="margin-left:5px;"') . PHP_EOL;
 						$navItemLogin .= '</li>' . PHP_EOL;
 						print $navItemLogin;
 					}
@@ -57,13 +57,12 @@
 					if (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] == true) {
 						$navItemLogout = '<li class="nav-item">' . PHP_EOL;
 						//$navItemLogout .= '<button id="nav-btn-logout" type="button" class="btn btn-outline-danger" href="#">SAIR</button>' . PHP_EOL;
-						$navItemLogin .=  anchor('auth/logout', 'Logout', 'class="btn btn-outline-danger"') . PHP_EOL;
+						$navItemLogin .=  anchor('user/logout', 'Logout', 'class="btn btn-outline-danger"') . PHP_EOL;
 						$navItemLogout .= '</li>' . PHP_EOL;
 						print $navItemLogout;
 						?>
 						<li  class="nav-item"><img class="rounded-circle " src="img/<?= Usuario::findById($_SESSION['id_usuario'])->getImagem()?>" alt="Avatar do Usuario"  style="width:38px; margin:2px 10px"></li>;
 						<?php
-
 					}
 					?>
 				</ul>
