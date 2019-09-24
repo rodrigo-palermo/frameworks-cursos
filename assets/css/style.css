@@ -4,8 +4,16 @@ header {
 	margin-bottom: 10px;
 }
 
-div .login {
-	max-width: 400px;
+.flex-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-flow: row wrap;
+}
+
+.flex-container > div {
+	margin: 10px;
+	padding: 20px;
 }
 
 footer {

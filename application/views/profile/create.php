@@ -6,7 +6,7 @@
 
 <div class="form-group">
     <label for="nome">Nome</label>
-    <input type="input" name="nome" value="<?=isset($profile)?$profile['nome']:'';?>">
+    <input type="input" class="form-control"  name="nome" value="<?=isset($profile)?$profile['nome']:'';?>">
 </div>
 
 <input type="hidden" name="hdnId" value="<?=isset($profile)?$profile['id']:'';?>">
