@@ -35,9 +35,9 @@ class User extends CI_Controller
             $this->user_model->set_user();
             # todo: feature: verificar se usuario ja existe antes de gravar (ou tratar erro se no banco houver conflito)
 			# todo: ver libraries config e email
-			$this->load->library('email');
+			#$this->load->library('email');
 
-			$this->email->from('avilapalermo@gmail.com', 'Administrador');
+			$this->email->from('eng.rodrigo.palermo@gmail.com', 'Administrador');
 			$this->email->to('avilapalermo@gmail.com');
 
 			$this->email->subject('Email Test');
