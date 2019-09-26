@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Cursos Online <?php echo ' :: '.$title; ?></title>
+		<link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url().'favicon.ico';?>">
         <?php
         require_once __DIR__.'/headLinks.php';
         require_once __DIR__.'/autenticacao.php';
