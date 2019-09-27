@@ -55,11 +55,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 //$route['sub-folder-test/subcontroller'] = 'sub-folder-test/subcontroller';
 //$route['subcontroller/test'] = 'subcontroller/';
-$route['news/create'] = 'news/create';
+/* $route['news/create'] = 'news/create';
 $route['user/create'] = 'user/create';
 $route['user/(:any)'] = 'user/view/$1';
 $route['news/test'] = 'news/test';
 $route['news/(:any)'] = 'news/view/$1';
 $route['news'] = 'news';
-$route['(:any)'] = 'home/view/$1';
+$route['(:any)'] = 'home/view/$1'; */
 $route['default_controller'] = 'home/view';

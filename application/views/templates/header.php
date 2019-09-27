@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Cursos Online <?php echo ' :: '.$title; ?></title>
+		<link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url().'favicon.ico';?>">
         <?php
         require_once __DIR__.'/headLinks.php';
         require_once __DIR__.'/autenticacao.php';
@@ -37,22 +38,31 @@
 					<?php
 					if (!isset($_SESSION['autenticado']) || (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] == false)) {
 						$navItemLogin = '<li class="nav-item ">' . PHP_EOL;
-						$navItemLogin .= '<button id="nav-btn-login" type="button" class="btn btn-outline-info" href="#">LOGIN</button>' . PHP_EOL;
+						//$navItemLogin .= '<button id="nav-btn-login" type="button" class="btn btn-outline-info" href="#">LOGIN</button>' . PHP_EOL;
+						$navItemLogin .=  anchor('user/login', 'Entrar', 'class="btn btn-outline-info"') . PHP_EOL;
 						$navItemLogin .= '</li>' . PHP_EOL;
 						print $navItemLogin;
+					}
+					?>
+					<!--//REGISTER-->
+					<?php
+					if (!isset($_SESSION['autenticado']) || (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] == false)) {
+						$navItemRegister = '<li class="nav-item ">' . PHP_EOL;
+						$navItemRegister .=  anchor('user/register', 'Criar conta', 'class="btn btn-outline-success" style="margin-left:5px;"') . PHP_EOL;
+						$navItemRegister .= '</li>' . PHP_EOL;
+						print $navItemRegister;
 					}
 					?>
 					<!--//LOGOUT-->
 					<?php
 					if (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] == true) {
 						$navItemLogout = '<li class="nav-item">' . PHP_EOL;
-						$navItemLogout .= '<button id="nav-btn-logout" type="button" class="btn btn-outline-danger" href="#">SAIR</button>' . PHP_EOL;
+						//$navItemLogout .= '<button id="nav-btn-logout" type="button" class="btn btn-outline-danger" href="#">SAIR</button>' . PHP_EOL;
+						$navItemLogout .=  anchor('user/logout', 'Sair', 'class="btn btn-outline-danger"') . PHP_EOL;
 						$navItemLogout .= '</li>' . PHP_EOL;
 						print $navItemLogout;
 						?>
-						<li  class="nav-item"><img class="rounded-circle " src="img/<?= Usuario::findById($_SESSION['id_usuario'])->getImagem()?>" alt="Avatar do Usuario"  style="width:38px; margin:2px 10px"></li>;
 						<?php
-
 					}
 					?>
 				</ul>
@@ -62,7 +72,8 @@
         </nav>
     </header>
     <main>
-        <div class="container">
+        <div class="flex-container">
+			<div>
 			<?php
 			//Avoid 'Voltar' button to receive same url when reload/refresh the page
 			if(isset($_SESSION['acao_atual']) && $_SESSION['acao_atual'] != current_url()) {

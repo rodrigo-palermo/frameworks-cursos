@@ -27,4 +27,38 @@ class User_model extends CI_Model
         $query = $this->db->get('usuario');
         return $query->result_array();
     }
+
+    public function get_user($id)
+    {
+        $query = $this->db->get_where('usuario', array('id' => $id));
+        return $query->row();
+    }
+
+    public function get_id_by_username($username)
+    {
+        $query = $this->db->get_where('usuario', array('nome' => $username), 1);
+        $row = $query->row();
+        if(isset($row))
+        	return $row->id;
+        else
+        	return False;
+    }
+
+    public function auth_user()
+    {
+        $data = array(
+            'nome' => $this->input->post('nome'),
+            'senha' => $this->input->post('senha')
+        );
+
+        $id = $this->get_id_by_username($data['nome']);
+
+        if($id){
+        	if($data['nome'] == $this->get_user($id)->nome){
+				return True;
+			}
+		}
+        return False;
+
+    }
 }
