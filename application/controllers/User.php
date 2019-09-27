@@ -28,7 +28,7 @@ class User extends CI_Controller
         $this->form_validation->set_rules('senha', 'Senha', 'required', 'placeholder="Senha"');
 
 		$recaptchaResponse = $this->input->post('g-recaptcha-response');
-		$secret = 'PEGAR SECRET KEY NA CONTA - alterado antes de implementar git-secret ou outro para heroku';
+		$secret = 'CHANGE KEY';
 		$url = 'https://www.google.com/recaptcha/api/siteverify';
 		$data1 = array('secret' => $secret, 'response' => $recaptchaResponse);
 		$ch = curl_init();
