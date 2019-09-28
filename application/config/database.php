@@ -73,7 +73,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'postgresql';
 $query_builder = TRUE;
 
-$url = parse_url(getenv('DATABASE_URL'));
+#heroku
+$database_url = getenv('DATABASE_URL');
+if(!$database_url){
+	$database_url = 'postgres://postgres:admin@localhost:5432/ci_cursos';
+}
+
+$url = parse_url($database_url);
 $url["path"] = ltrim($url["path"], "/");
 
 $db['default'] = array(
