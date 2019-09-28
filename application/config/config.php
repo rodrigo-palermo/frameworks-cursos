@@ -23,7 +23,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/cursos/';
+$protocol = is_https() ? "https://" : "http://";
+$host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : "";
+if(is_cli()){
+	$config['base_url'] = '';
+}
+else if(stristr($host, "localhost") !== FALSE || (stristr($host, '192.168.') !== FALSE) || (stristr($host, '127.0.0') !== FALSE)){
+	$config['base_url'] = $protocol.$host."/cursos/";
+}
+else{
+	$allowed_hosts = array('curso-online.herokuapp.com/');
+	$config['base_url'] = in_array($host, $allowed_hosts) ? $protocol.$host."/" : "not-recognised-host.com";
+}
 
 /*
 |--------------------------------------------------------------------------

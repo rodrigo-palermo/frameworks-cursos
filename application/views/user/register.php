@@ -13,10 +13,10 @@
     </select>
 </div>
 <div class="form-group">
-    <input type="input" class="form-control" name="nome" placeholder="Username" title="Username">
+	<input type="email" class="form-control" name="email" placeholder="E-mail" title="E-mail">
 </div>
 <div class="form-group">
-    <input type="email" class="form-control" name="email" placeholder="E-mail" title="E-mail">
+    <input type="input" class="form-control" name="nome" placeholder="Username" title="Username">
 </div>
 <div class="form-group">
     <input type="password" class="form-control" name="senha" placeholder="Senha" title="Senha">
