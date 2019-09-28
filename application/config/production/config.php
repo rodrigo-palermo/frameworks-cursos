@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$config['base_url'] = 'http://curso-online.herokuapp.com/';
+$config['base_url'] = '';
 
 $config['index_page'] = '';
