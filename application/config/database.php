@@ -76,6 +76,7 @@ $query_builder = TRUE;
 #heroku
 $database_url = getenv('DATABASE_URL');
 if(!$database_url){
+	#localost
 	$database_url = 'postgres://postgres:admin@localhost:5432/ci_cursos';
 }
 
