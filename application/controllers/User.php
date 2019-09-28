@@ -28,7 +28,7 @@ class User extends CI_Controller
         $this->form_validation->set_rules('senha', 'Senha', 'required', 'placeholder="Senha"');
 
 		$recaptchaResponse = $this->input->post('g-recaptcha-response');
-		$secret = 'CHANGE KEY';
+		$secret = $this->config->item('g-recaptha-backend-key');
 		$url = 'https://www.google.com/recaptcha/api/siteverify';
 		$data1 = array('secret' => $secret, 'response' => $recaptchaResponse);
 		$ch = curl_init();
