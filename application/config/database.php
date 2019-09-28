@@ -70,8 +70,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
-$active_group = 'default';
+$active_group = 'postgresql';
 $query_builder = TRUE;
+
+$url = parse_url(getenv('DATABASE_URL'));
+$url["path"] = ltrim($url["path"], "/");
 
 $db['default'] = array(
 	'dsn'	=> '',
@@ -94,3 +97,51 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+
+$db['postgresql'] = array(
+	'dsn'	=> '',
+	'hostname' => $url["host"],
+	'port' => $url["port"],
+	'username' => $url["user"],
+	'password' => $url["pass"],
+	'database' => $url["path"],
+	'dbdriver' => 'postgre',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE,
+);
+
+//$db['postgresql'] = array(
+// para uso de SET VARIBLAE no windows do DB local: SET DATABASE_URL=postgres://postgres:admin@localhost:5432/ci_cursos
+//'dsn' => 'pgsql:host=localhost;port=5432;dbname=ci_cursos;user=postgres;password=admin’,
+//	'dsn'	=> '',
+//	'hostname' => 'localhost',
+//	'username' => 'postgres',
+//	'password' => 'admin',
+//	'database' => 'ci_cursos',
+//	'dbdriver' => 'postgre',
+//	'dbprefix' => '',
+//	'pconnect' => FALSE,
+//	'db_debug' => (ENVIRONMENT !== 'production'),
+//	'cache_on' => FALSE,
+//	'cachedir' => '',
+//	'char_set' => 'utf8',
+//	'dbcollat' => 'utf8_general_ci',
+//	'swap_pre' => '',
+//	'encrypt' => FALSE,
+//	'compress' => FALSE,
+//	'stricton' => FALSE,
+//	'failover' => array(),
+//	'save_queries' => TRUE,
+//	'port' => '5432'
+//);

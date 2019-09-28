@@ -1,5 +1,5 @@
 <h2><?php echo $title; ?></h2>
-
+<a href="<?php echo base_url().'user/create'; ?>" class="btn btn-outline-primary" title="Adicionar">+</a>
 <table class='table'>
     <thead>
         <tr>

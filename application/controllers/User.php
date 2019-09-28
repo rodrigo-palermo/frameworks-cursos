@@ -20,7 +20,7 @@ class User extends CI_Controller
 
         $data['profiles'] = $this->profile_model->get_profile();
 
-        $data['title'] = 'Cadastro de usuário';
+        $data['title'] = 'Criar conta';
 
         $this->form_validation->set_rules('id_perfil', 'Perfil', 'required');
         $this->form_validation->set_rules('nome', 'Nome', 'required');
@@ -133,19 +133,8 @@ class User extends CI_Controller
 		else
 		{
 			$this->user_model->set_user();
-			# todo: feature: verificar se usuario ja existe antes de gravar (ou tratar erro se no banco houver conflito)
-			# todo: ver libraries config e email
-			#$this->load->library('email');
-
-			$this->email->from('eng.rodrigo.palermo@gmail.com', 'Administrador');
-			$this->email->to('avilapalermo@gmail.com');
-
-			$this->email->subject('Email Test');
-			$this->email->message('Testing the email class.');
-
-			$this->email->send();
-
-			$this->load->view('user/register_email_sent');
+			//$this->load->view('templates/success');
+			redirect(base_url().'user/view');
 		}
 		$this->load->view('templates/footer');
 	}
