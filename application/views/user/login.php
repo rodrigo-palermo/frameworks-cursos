@@ -6,10 +6,12 @@ if(isset($_SESSION['loginError']) and $_SESSION['loginError'] == True){?>
 	<?=$errorMessage?>
 </div>
 <?php
+} else {
+	echo validation_errors();
 }
 ?>
 
-<?php echo validation_errors(); ?>
+
 
 <?php echo form_open('user/login'); ?>
 

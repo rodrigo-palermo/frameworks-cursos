@@ -1,7 +1,26 @@
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <h2><?php echo $title; ?></h2>
 
-<?php echo validation_errors(); ?>
+<?php
+if(isset($_SESSION['robotError']) and $_SESSION['robotError'] == True) {?>
+	<div class="alert alert-warning">
+<!--		--><?//=$robotMessage?>
+	</div>
+	<?php
+} else if(isset($_SESSION['duplicateUserError']) and $_SESSION['duplicateUserError'] == True){?>
+	<div class="alert alert-warning">
+		<?=$duplicateUserMessage?>
+	</div>
+	<?php
+} else if(isset($_SESSION['passwordMismatchError']) and $_SESSION['passwordMismatchError'] == True){?>
+	<div class="alert alert-warning">
+		<?=$passwordMismatchMessage?>
+	</div>
+	<?php
+} else {
+	echo validation_errors();
+}
+?>
 
 <?php echo form_open('user/register'); ?>
 
@@ -20,6 +39,9 @@
 </div>
 <div class="form-group">
     <input type="password" class="form-control" name="senha" placeholder="Senha" title="Senha">
+</div>
+<div class="form-group">
+	<input type="password" class="form-control" name="senha_repetida" placeholder="Senha novamente" title="Senha novamente">
 </div>
 <div class="form-group">
 <div class="g-recaptcha" data-sitekey="6LemdroUAAAAADqsn__gjmwuz7YtCowA-NqeEOJX"></div>

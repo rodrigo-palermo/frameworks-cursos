@@ -17,3 +17,6 @@
 
 <!-- Other CSS -->
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css')?>">
+
+<!-- Material design icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

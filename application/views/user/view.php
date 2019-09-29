@@ -1,11 +1,12 @@
 <h2><?php echo $title; ?></h2>
-<a href="<?php echo base_url().'user/create'; ?>" class="btn btn-outline-primary" title="Adicionar">+</a>
+<a href="<?php echo base_url().'user/create'; ?>" class="btn btn-outline-primary" title="Adicionar"><i class="material-icons">person_add</i></a>
 <table class='table'>
     <thead>
         <tr>
             <th>Nome</td>
             <th>e-mail</td>
             <th>Data de Inscrição</td>
+            <th>Ações</td>
         </tr>
     </thead>
     <tbody>
@@ -14,6 +15,9 @@
         echo '<td>'.$users_item['nome'].'</td>'.PHP_EOL;
         echo '<td>'.$users_item['email'].'</td>'.PHP_EOL;
         echo '<td>'.$users_item['dth_inscricao'].'</td>'.PHP_EOL;
+		echo '<td><a href='.base_url().'user/create/'.$users_item['id'].' class="btn btn-outline-primary" title="Editar"><i class="material-icons">edit</i></a>
+				  <a href='.base_url().'user/delete/'.$users_item['id'].' class="btn btn-outline-danger" title="Excluir"><i class="material-icons">delete</i></a></td>
+        	      '.PHP_EOL;
         echo '</tr>'.PHP_EOL;
     }?>
     </tbody>
