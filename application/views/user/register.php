@@ -2,12 +2,7 @@
 <h2><?php echo $title; ?></h2>
 
 <?php
-if(isset($_SESSION['robotError']) and $_SESSION['robotError'] == True) {?>
-	<div class="alert alert-warning">
-<!--		--><?//=$robotMessage?>
-	</div>
-	<?php
-} else if(isset($_SESSION['duplicateUserError']) and $_SESSION['duplicateUserError'] == True){?>
+if(isset($_SESSION['duplicateUserError']) and $_SESSION['duplicateUserError'] == True){?>
 	<div class="alert alert-warning">
 		<?=$duplicateUserMessage?>
 	</div>

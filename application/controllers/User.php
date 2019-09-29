@@ -62,6 +62,7 @@ class User extends CI_Controller
 		$this->load->view('templates/footer');
 
 	}
+
     public function register()
     {
     	#Inclui verificacao reCaptcha
@@ -74,10 +75,10 @@ class User extends CI_Controller
 
 		$data['duplicateUserMessage'] = 'Nome de usuário indisponível. Tente outro.';
 		$data['passwordMismatchMessage'] = 'Senhas não conferem. Tente novamente';
-		$data['robotMessage'] = 'Confirme que você é uma pessoa.';
+		#$data['robotMessage'] = 'Confirme que você é uma pessoa.';
 		$this->session->set_userdata('duplicateUserError', False);
 		$this->session->set_userdata('passwordMismatchError', False);
-		$this->session->set_userdata('robotError', False);
+		#$this->session->set_userdata('robotError', False);
 
         $data['title'] = 'Criar conta';
 
@@ -107,14 +108,12 @@ class User extends CI_Controller
 
 		$allow_register = $this->user_model->allow_register();
 		$repeated_pass_match = $this->user_model->repeated_pass_match();
+		$isPerson = $status['success']?True:False;
 
-        if ($this->form_validation->run() === FALSE || !$status['success'] || !$allow_register || !$repeated_pass_match)
+        if ($this->form_validation->run() === FALSE || !$isPerson || !$allow_register || !$repeated_pass_match)
 		{
 
-			if(!$status['success']){
-				$this->session->set_userdata('robotError', True);
-			}
-			else if(!$allow_register){
+			if(!$allow_register){
 				$this->session->set_userdata('duplicateUserError', True);
 			}
 			else if(!$repeated_pass_match){
@@ -127,10 +126,10 @@ class User extends CI_Controller
             $this->user_model->set_user();
 
 			$this->email->from('eng.rodrigo.palermo@gmail.com', 'Cursos Online Team');
-			$this->email->to('avilapalermo@gmail.com');
+			$this->email->to($email);
 
-			$this->email->subject('Sua nova conta no Cursos Online');
-			$this->email->message('Sua nova conta no Cursos Online está ponta.\n\n Acesse o site faça o login.');
+			$this->email->subject('Cursos Online - Nova conta');
+			$this->email->message('Sua nova conta no Cursos Online está pronta.\n\n Acesse o site faça o login.');
 
 			$this->email->send();
 
@@ -182,6 +181,56 @@ class User extends CI_Controller
 			redirect(base_url().'user/view');
 		}
 		$this->load->view('templates/footer');
+	}
+
+	public function reset_pass()
+	{
+
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		$data['title'] = 'Login - Redefinir senha';
+		$data['emailErrorMessage'] = 'E-mail não encontrado. Tente novamente';
+
+		$this->session->set_userdata('emailError', False);
+
+		$this->form_validation->set_rules('email', 'E-mail de recuperação', 'required');
+
+		$this->load->view('templates/header', $data);
+		if($this->form_validation->run() === False) {
+			$this->load->view('user/reset_pass');
+		}else {
+			if($this->user_model->auth_user_email()){
+
+				$new_password = $this->random_password(4);
+				$email = $this->input->post('email');
+
+				$id = $this->user_model->get_id_by_email($email);
+				$this->user_model->reset_user_password($id, $new_password);
+
+				$this->email->from('eng.rodrigo.palermo@gmail.com', 'Cursos Online Team');
+				$this->email->to($email);
+
+				$this->email->subject('Cursos Online - Redefinir senha');
+				$this->email->message('Sua senha foi redefinida.<br>
+ 									    Nova senha provisória: '.$new_password.PHP_EOL.'<br>
+				                       Faça login e altere esta senha provisória no menu de configurações da conta.');
+
+				$this->email->send();
+
+				$this->load->view('user/reset_pass_email_sent');
+			} else {
+				$this->session->set_userdata('emailError', True);
+				$this->load->view('user/reset_pass', $data);
+			}
+		}
+		$this->load->view('templates/footer');
+	}
+
+	private function random_password($length)
+	{
+		$sample = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz!#*?';
+		return substr(str_shuffle($sample), 0, $length);
 	}
 
 }

@@ -46,6 +46,16 @@ class User_model extends CI_Model
         	return False;
     }
 
+	public function get_id_by_email($email)
+    {
+        $query = $this->db->get_where($this->table, array('email' => $email), 1);
+        $row = $query->row();
+        if(isset($row))
+        	return $row->id;
+        else
+        	return False;
+    }
+
 	public function delete_user($id)
 	{
 		$this->db->where('id', $id);
@@ -53,6 +63,7 @@ class User_model extends CI_Model
 		return True;
 	}
 
+	//Authenticate user login
     public function auth_user()
     {
         $data = array(
@@ -97,5 +108,31 @@ class User_model extends CI_Model
 			}
 		return False;
 	}
+
+	//Authenticate user e-mail for use in password reset method
+	public function auth_user_email()
+	{
+		$data = array(
+			'email' => $this->input->post('email')
+		);
+
+		$id = $this->get_id_by_email($data['email']);
+
+		if($id) {
+			return True;
+		}
+		return False;
+	}
+
+	public function reset_user_password($id, $new_password)
+	{
+		$this->db->set('senha', $new_password);
+		$this->db->where('id', $id);
+		return $this->db->update($this->table);
+
+	}
+
+
+
 
 }

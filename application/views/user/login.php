@@ -23,5 +23,6 @@ if(isset($_SESSION['loginError']) and $_SESSION['loginError'] == True){?>
 </div>
 
 <input class="btn btn-primary" type="submit" name="submit" value="Entrar">
+<a href="<?php echo base_url().'user/reset_pass/';?>." class="btn btn-secondary">Redefinir senha</a>
 <a href="<?php echo $this->session->acao_origem; ?>" class="btn btn-secondary">Voltar</a>
 </form>
