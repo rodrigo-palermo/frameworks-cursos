@@ -31,8 +31,12 @@ if(isset($_SESSION['duplicateUserError']) and $_SESSION['duplicateUserError'] ==
 <!--    <input type="email" class="form-control" name="email" placeholder="E-mail" title="E-mail" value="--><?//=isset($user)?$user['email']:'';?><!--">-->
 </div>
 <div class="form-group">
-	<label for="title">Username</label>
-	<input type="input" class="form-control" name="nome" placeholder="Username" title="Username" value="<?=$user['nome'];?>">
+<!--	<label for="title">Username</label>-->
+<!--	<input type="input" class="form-control" name="nome" placeholder="Username" title="Username" value="--><?//=$user['nome'];?><!--">-->
+</div>
+<div class="form-group">
+	<label for="title">Imagem</label>
+	<input type="input" class="form-control" name="imagem" placeholder="Imagem" title="Imagem" value="<?=$user['imagem'];?>">
 </div>
 <div class="form-group">
 <!--	<label for="title">Senha</label>-->

@@ -152,6 +152,28 @@ class User_model extends CI_Model
 		return False;
 	}
 
+	public function verify_user_password($id)
+	{
+		$data = array(
+			'senha_atual_digitada' => $this->input->post('senha_atual_digitada'),
+			'senha' => $this->get_password_by_id($id)
+		);
+		if($data['senha_atual_digitada'] == $data['senha']){
+			return True;
+		}
+		return False;
+	}
+
+	private function get_password_by_id($id)
+	{
+		$query = $this->db->get_where($this->table, array('id' => $id), 1);
+		$row = $query->row();
+		if(isset($row))
+			return $row->senha;
+		else
+			return False;
+	}
+
 	public function reset_user_password($id, $new_password)
 	{
 		$this->db->set('senha', $new_password);

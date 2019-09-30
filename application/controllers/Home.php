@@ -16,7 +16,7 @@ class Home extends CI_Controller {
         $data['title'] = ucfirst($page);
 
         $this->load->view('templates/header', $data);
-        if(!$this->session->autenticado || $this->session->perfil != 'Administrador' ){
+        if(!$this->session->autenticado || $this->session->usuario_perfil != 'Administrador' ){
 			$this->load->view('home/' . $page, $data);
 		} else {
 			$this->load->view('home/' . $page_admin, $data);

@@ -27,11 +27,22 @@
 				<ul class="navbar-nav bd-navbar-nav ml-auto">
 					<!--//ADMIN-->
 					<?php
-					if (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] == true && isset($_SESSION['perfil']) && $_SESSION['perfil'] == 1) { //(id_perfil ou cod_perfil) = 1 para ADMIN
+					if (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] == True && isset($_SESSION['usuario_perfil']) && $_SESSION['usuario_perfil'] == 'Administrador') {
 						$navItemAdmin = '<li class="nav-item">' . PHP_EOL;
-						$navItemAdmin .= '<a class="nav-link" href="#">Administrador</a>' . PHP_EOL;
+//						$navItemAdmin .= '<a class="nav-link" href="#">Administrador</a>' . PHP_EOL;
+						$navItemAdmin .=  anchor(base_url(), $this->session->usuario_nome, 'class="btn btn-outline-info"') . PHP_EOL;
 						$navItemAdmin .= '</li>' . PHP_EOL;
 						print $navItemAdmin;
+					}
+					?>
+					<!--//CONTA-->
+					<?php
+					if (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] == true && isset($_SESSION['usuario_perfil']) && $_SESSION['usuario_perfil'] != 'Administrador') {
+						$navItemAccount = '<li class="nav-item">' . PHP_EOL;
+//						$navItemAccount .= '<a class="nav-link" href="#">Conta</a>' . PHP_EOL;
+						$navItemAccount .=  anchor('user/account', $this->session->usuario_nome, 'class="btn btn-outline-info"') . PHP_EOL;
+						$navItemAccount .= '</li>' . PHP_EOL;
+						print $navItemAccount;
 					}
 					?>
 					<!--//LOGIN-->
@@ -48,7 +59,7 @@
 					<?php
 					if (!isset($_SESSION['autenticado']) || (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] == false)) {
 						$navItemRegister = '<li class="nav-item ">' . PHP_EOL;
-						$navItemRegister .=  anchor('user/register', 'Criar conta', 'class="btn btn-outline-success" style="margin-left:5px;"') . PHP_EOL;
+						$navItemRegister .=  anchor('user/register', 'Criar conta', 'class="btn btn-outline-success"') . PHP_EOL;
 						$navItemRegister .= '</li>' . PHP_EOL;
 						print $navItemRegister;
 					}

@@ -5,6 +5,13 @@ body, html {
 header {
 	margin-bottom: 10px;
 }
+.nav-item{
+	margin-left:5px;
+}
+
+.list-group-item-title{
+	margin-top:20px;
+}
 
 .flex-container {
 	display: flex;
