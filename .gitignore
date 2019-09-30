@@ -34,3 +34,5 @@ application/config/development/*
 application/config/production/*
 
 
+/application/config/production/
+/application/config/development/
