@@ -1,21 +1,7 @@
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <h2><?php echo $title; ?></h2>
 
-<?php
-if(isset($_SESSION['oldPasswordMismatchError']) and $_SESSION['oldPasswordMismatchError'] == True){?>
-	<div class="alert alert-warning">
-		<?=$oldPasswordMismatchMessage?>
-	</div>
-	<?php
-} else if(isset($_SESSION['passwordMismatchError']) and $_SESSION['passwordMismatchError'] == True){?>
-	<div class="alert alert-warning">
-		<?=$passwordMismatchMessage?>
-	</div>
-	<?php
-} else {
-	echo validation_errors();
-}
-?>
+<?php echo validation_errors();?>
 
 <?php echo form_open('user/change_pass'); ?>
 <div class="form-group">

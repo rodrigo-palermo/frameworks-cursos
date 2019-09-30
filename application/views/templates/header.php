@@ -20,7 +20,7 @@
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a id='navHome' class="nav-link active" href="#">Home</a>
+						<a id='navHome' class="nav-link active" href="<?=base_url();?>">Home</a>
 					</li>
 <!--					 Include navs for all pages and add HREF for all navs ons this header page-->
 				</ul>
@@ -93,5 +93,5 @@
 				$_SESSION['acao_atual'] = current_url();
 			}
 			//Enable CI Profiler in all pages
-			$this->output->enable_profiler(TRUE);
+			//$this->output->enable_profiler(TRUE);
 			?>

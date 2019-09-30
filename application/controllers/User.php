@@ -102,10 +102,8 @@ class User extends CI_Controller
         $data['profiles'] = $this->profile_model->get_profile();
 
 		$data['duplicateUserMessage'] = 'Nome de usuário indisponível. Tente outro.';
-		$data['passwordMismatchMessage'] = 'Senhas não conferem. Tente novamente';
 		#$data['robotMessage'] = 'Confirme que você é uma pessoa.';
 		$this->session->set_userdata('duplicateUserError', False);
-		$this->session->set_userdata('passwordMismatchError', False);
 		#$this->session->set_userdata('robotError', False);
 
         $data['title'] = 'Criar conta';
@@ -114,7 +112,7 @@ class User extends CI_Controller
         $this->form_validation->set_rules('nome', 'Nome', 'required');
         $this->form_validation->set_rules('email', 'E-mail', 'required');
         $this->form_validation->set_rules('senha', 'Senha', 'required', 'placeholder="Senha"');
-		$this->form_validation->set_rules('senha_repetida', 'Confirme a senha', 'required', 'placeholder="Confirme a senha"');
+		$this->form_validation->set_rules('senha_repetida', 'Confirme a senha', 'required|matches[senha]', 'placeholder="Confirme a senha"');
 
 		$recaptchaResponse = $this->input->post('g-recaptcha-response');
 		$secret = $this->config->item('g-recaptha-backend-key');
@@ -135,18 +133,14 @@ class User extends CI_Controller
         $this->load->view('templates/header', $data);
 
 		$allow_register = $this->user_model->allow_register();
-		$repeated_pass_match = $this->user_model->repeated_pass_match();
 		$isPerson = $status['success']?True:False;
 
-        if ($this->form_validation->run() === FALSE || !$isPerson || !$allow_register || !$repeated_pass_match)
+        if ($this->form_validation->run() === FALSE || !$isPerson || !$allow_register)
 		{
 
-			if(!$allow_register){
+			if(!$allow_register)
 				$this->session->set_userdata('duplicateUserError', True);
-			}
-			else if(!$repeated_pass_match){
-				$this->session->set_userdata('passwordMismatchError', True);
-			}
+
 			$this->load->view('user/register');
 		}
         else
@@ -327,16 +321,21 @@ class User extends CI_Controller
 		$data['user'] = $arrUserTemp[0];
 
 		$data['oldPasswordMismatchMessage'] = 'Senha atual não confere. Tente novamente';
-		$data['passwordMismatchMessage'] = 'Senhas não conferem. Tente novamente';
 		$this->session->set_userdata('oldPasswordMismatchError', False);
-		$this->session->set_userdata('passwordMismatchError', False);
 
 		$data['title'] = 'Alterar senha';
 
-		$this->form_validation->set_rules('senha_atual_digitada', 'Senha atual', 'required', 'placeholder="Senha atual"');
-		$this->form_validation->set_rules('senha', 'Nova senha', 'required', 'placeholder="Nova senha"');
-		$this->form_validation->set_rules('senha_repetida', 'Confirme a nova senha', 'required', 'placeholder="Confirme a nova senha"');
+		$this->form_validation->set_rules('senha_atual_digitada', 'Senha atual', 'required|callback_verify_user_password', 'placeholder="Senha atual"');
 
+//		$this->form_validation->set_rules(
+//			'senha_atual_digitada', 'Senha atual',
+//			array(
+//				'old_pass_match',
+//				array('senha_atual_digitada_callable', array($this->user_model, 'verify_user_password'))
+//			)
+//		);
+		$this->form_validation->set_rules('senha', 'Nova senha', 'required', 'placeholder="Nova senha"');
+		$this->form_validation->set_rules('senha_repetida', 'Confirme a nova senha', 'required|matches[senha]', 'placeholder="Confirme a nova senha"');
 		$recaptchaResponse = $this->input->post('g-recaptcha-response');
 		$secret = $this->config->item('g-recaptha-backend-key');
 		$url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -355,37 +354,41 @@ class User extends CI_Controller
 
 		$this->load->view('templates/header', $data);
 
-		$old_password_match = $this->user_model->verify_user_password($id);
+		$old_password_match = $this->verify_user_password($id);
 		$repeated_pass_match = $this->user_model->repeated_pass_match();
 		$isPerson = $status['success']?True:False;
 
-		if ($this->form_validation->run() === FALSE || !$isPerson || !$old_password_match || !$repeated_pass_match)
+		if ($this->form_validation->run() === FALSE || !$isPerson || !$old_password_match)
 		{
 
-			if(!$old_password_match){
+			if(!$old_password_match)
 				$this->session->set_userdata('oldPasswordMismatchError', True);
-			}
-			else if(!$repeated_pass_match){
-				$this->session->set_userdata('passwordMismatchError', True);
-			}
+
 			$this->load->view('user/change_pass', $data);
 		}
 		else
 		{
-			$this->user_model->set_user();
-			$user_email = $this->input->post('email');
+			$new_password = $this->input->post('senha');
+			$this->user_model->reset_user_password($id, $new_password);
 
-			$this->email->from('eng.rodrigo.palermo@gmail.com', 'Cursos Online Team');
-			$this->email->to($user_email);
 
-			$this->email->subject('Cursos Online - Nova conta');
-			$this->email->message('Sua nova conta no Cursos Online está pronta. Acesse o site para fazer o login.');
-
-			$this->email->send();
-
-			$this->load->view('user/register_email_sent');
+			$this->load->view('user/change_pass_success');
 		}
 		$this->load->view('templates/footer');
+	}
+
+	public function verify_user_password()
+	{
+		$id = $this->session->usuario_id;
+		$data = array(
+			'senha_atual_digitada' => $this->input->post('senha_atual_digitada'),
+			'senha' => $this->user_model->get_password_by_id($id)
+		);
+		if($data['senha_atual_digitada'] == $data['senha']){
+			return True;
+		}
+		$this->form_validation->set_message('verify_user_password', 'Senha atual não confere. Tente novamente.');
+		return False;
 	}
 
 
