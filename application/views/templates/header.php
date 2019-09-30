@@ -82,4 +82,5 @@
 				$_SESSION['acao_atual'] = current_url();
 			}
 			//Enable CI Profiler in all pages
-			$this->output->enable_profiler(TRUE);?>
+			$this->output->enable_profiler(TRUE);
+			?>

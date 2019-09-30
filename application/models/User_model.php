@@ -56,7 +56,11 @@ class User_model extends CI_Model
 
     public function get_user($id)
     {
-        $query = $this->db->get_where($this->table, array('id' => $id));
+		$this->db->where('usuario.id',$id);
+		$this->db->select('usuario.*, perfil.nome perfil_nome');
+		$this->db->from('usuario');
+		$this->db->join('perfil','usuario.id_perfil = perfil.id');
+		$query = $this->db->get();
         return $query->row();
     }
 

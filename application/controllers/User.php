@@ -54,8 +54,23 @@ class User extends CI_Controller
 			$this->load->view('user/login');
 		}else {
 			if($this->user_model->auth_user()){
-				$this->session->set_userdata('autenticado', True);
+
+				$username = $this->input->post('nome');
+				$id = $this->user_model->get_id_by_username($username);
+				$user = $this->user_model->get_user($id);
+
+				$logado = array(
+					'autenticado' => True,
+					'usuario_id' => $user->id,
+					'usuario_nome'  => $user->nome,
+					'usuario_email'     => $user->email,
+					'usuario_perfil' => $user->perfil_nome
+				);
+
+				$this->session->set_userdata($logado);
+
 				redirect(base_url().'');
+
 			} else {
 				$this->session->set_userdata('loginError', True);
 				$this->load->view('user/login', $data);

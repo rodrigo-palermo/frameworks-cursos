@@ -30,7 +30,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/tests/
 /tests/results/
 
-#application/config/development/*
-#application/config/production/*
+application/config/development/*
+application/config/production/*
 
 

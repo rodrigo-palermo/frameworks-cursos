@@ -6,7 +6,9 @@ class Home extends CI_Controller {
 
     public function view($page = 'home')
     {
-        if(!file_exists(APPPATH.'views/home/'.$page.'.php')) {
+        $page_admin = 'admin';
+
+    	if(!file_exists(APPPATH.'views/home/'.$page.'.php')) {
             //This page does not exists
             show_404();
         }
@@ -14,9 +16,14 @@ class Home extends CI_Controller {
         $data['title'] = ucfirst($page);
 
         $this->load->view('templates/header', $data);
-        $this->load->view('home/'.$page, $data);
+        if(!$this->session->autenticado || $this->session->perfil != 'Administrador' ){
+			$this->load->view('home/' . $page, $data);
+		} else {
+			$this->load->view('home/' . $page_admin, $data);
+		}
         $this->load->view('templates/footer', $data);
-        $this->output->enable_profiler(TRUE);
+        //client side debug
+//        $this->output->enable_profiler(FALSE);
 
     }
 }
