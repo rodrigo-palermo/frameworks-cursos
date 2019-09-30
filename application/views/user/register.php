@@ -22,7 +22,8 @@ if(isset($_SESSION['duplicateUserError']) and $_SESSION['duplicateUserError'] ==
 <div class="form-group">
     <select name="id_perfil" autofocus class="form-control" title="Perfil">
     <?php foreach ($profiles as $profiles_item){
-        echo '<option value='.$profiles_item['id'].'>'.$profiles_item['nome'].'</option>'.PHP_EOL;
+		if(!($profiles_item['nome'] == 'Administrador'))
+        	echo '<option value='.$profiles_item['id'].'>'.$profiles_item['nome'].'</option>'.PHP_EOL;
     }?>
     </select>
 </div>
@@ -36,7 +37,7 @@ if(isset($_SESSION['duplicateUserError']) and $_SESSION['duplicateUserError'] ==
     <input type="password" class="form-control" name="senha" placeholder="Senha" title="Senha">
 </div>
 <div class="form-group">
-	<input type="password" class="form-control" name="senha_repetida" placeholder="Senha novamente" title="Senha novamente">
+	<input type="password" class="form-control" name="senha_repetida" placeholder="Confirme a senha" title="Confirme a senha">
 </div>
 <div class="form-group">
 <div class="g-recaptcha" data-sitekey="6LemdroUAAAAADqsn__gjmwuz7YtCowA-NqeEOJX"></div>

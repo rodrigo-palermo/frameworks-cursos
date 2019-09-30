@@ -10,7 +10,7 @@ class User_model extends CI_Model
         $this->load->database();
     }
 
-    public function set_user()
+    public function set_user($id = false)
     {
         $this->load->helper('url');
 
@@ -21,12 +21,36 @@ class User_model extends CI_Model
             'senha' => $this->input->post('senha'),
         );
 
-        return $this->db->insert($this->table, $data);
+		if($id) {
+			$this->db->where('id', $id);
+			return $this->db->update($this->table, $data);
+		}
+		return $this->db->insert($this->table, $data);
     }
 
-    public function get_users()
+	public function set_user_by_admin($password)
+	{
+		$this->load->helper('url');
+
+		$data = array(
+			'id_perfil' => $this->input->post('id_perfil'),
+			'nome' => $this->input->post('nome'),
+			'email' => $this->input->post('email'),
+			'senha' => $password,
+		);
+
+		return $this->db->insert($this->table, $data);
+	}
+
+    public function get_users($id = false)
     {
-        $query = $this->db->get($this->table);
+		if($id){
+			$this->db->where('usuario.id',$id);
+		}
+		$this->db->select('usuario.*, perfil.nome perfil_nome');
+		$this->db->from('usuario');
+		$this->db->join('perfil','usuario.id_perfil = perfil.id');
+		$query = $this->db->get();
         return $query->result_array();
     }
 
@@ -131,6 +155,14 @@ class User_model extends CI_Model
 		return $this->db->update($this->table);
 
 	}
+
+	public function update_user_attribute($id, $attribute, $new_value)
+	{
+		$this->db->set($attribute, $new_value);
+		$this->db->where('id', $id);
+		return $this->db->update($this->table);
+	}
+
 
 
 

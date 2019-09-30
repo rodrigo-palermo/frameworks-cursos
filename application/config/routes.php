@@ -62,4 +62,6 @@ $route['news/test'] = 'news/test';
 $route['news/(:any)'] = 'news/view/$1';
 $route['news'] = 'news';
 $route['(:any)'] = 'home/view/$1'; */
+$route['user/create'] = 'user/create';
+$route['user/edit/$1'] = 'user/edit/$1';
 $route['default_controller'] = 'home/view';

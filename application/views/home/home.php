@@ -33,33 +33,33 @@
 			</div>
 		</li>
 		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-			<h6>Tópicos</h6>
+			<h6>Turmas</h6>
 			<div class="btn-group">
-				<?php echo anchor('topic/create','Cadastro','class="btn btn-outline-primary"')?>
-				<?php echo anchor('topic/view','Lista','class="btn btn-outline-primary"')?>
+				<?php echo anchor('class/create','Cadastro','class="btn btn-outline-primary"')?>
+				<?php echo anchor('class/view','Lista','class="btn btn-outline-primary"')?>
 			</div>
 		</li>
 		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-			<h6>Atividades</h6>
+			<h6>Conteúdos</h6>
 			<div class="btn-group">
-				<?php echo anchor('activity/create','Cadastro','class="btn btn-outline-primary"')?>
-				<?php echo anchor('activity/view','Lista','class="btn btn-outline-primary"')?>
+				<?php echo anchor('content/create','Cadastro','class="btn btn-outline-primary"')?>
+				<?php echo anchor('content/view','Lista','class="btn btn-outline-primary"')?>
 			</div>
 		</li>
-		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-			<h6>Avaliação</h6>
-			<div class="btn-group">
-				<?php echo anchor('test/create','Cadastro','class="btn btn-outline-primary"')?>
-				<?php echo anchor('test/view','Lista','class="btn btn-outline-primary"')?>
-			</div>
-		</li>
-		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-			<h6>Boletim</h6>
-			<div class="btn-group">
-				<?php echo anchor('report/create','Cadastro','class="btn btn-outline-primary"')?>
-				<?php echo anchor('report/view','Lista','class="btn btn-outline-primary"')?>
-			</div>
-		</li>
+<!--		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">-->
+<!--			<h6>Avaliação</h6>-->
+<!--			<div class="btn-group">-->
+<!--				--><?php //echo anchor('test/create','Cadastro','class="btn btn-outline-primary"')?>
+<!--				--><?php //echo anchor('test/view','Lista','class="btn btn-outline-primary"')?>
+<!--			</div>-->
+<!--		</li>-->
+<!--		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">-->
+<!--			<h6>Boletim</h6>-->
+<!--			<div class="btn-group">-->
+<!--				--><?php //echo anchor('report/create','Cadastro','class="btn btn-outline-primary"')?>
+<!--				--><?php //echo anchor('report/view','Lista','class="btn btn-outline-primary"')?>
+<!--			</div>-->
+<!--		</li>-->
 	</ul>
 </div>
 

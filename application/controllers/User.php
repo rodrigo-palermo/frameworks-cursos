@@ -14,6 +14,8 @@ class User extends CI_Controller
 	{
 		$data['title'] = 'Lista de usuários';
 
+		$this->load->model('profile_model');
+
 		$data['users'] = $this->user_model->get_users();
 
 		$this->load->view('templates/header', $data);
@@ -124,12 +126,13 @@ class User extends CI_Controller
         else
         {
             $this->user_model->set_user();
+            $user_email = $this->input->post('email');
 
 			$this->email->from('eng.rodrigo.palermo@gmail.com', 'Cursos Online Team');
-			$this->email->to($email);
+			$this->email->to($user_email);
 
 			$this->email->subject('Cursos Online - Nova conta');
-			$this->email->message('Sua nova conta no Cursos Online está pronta.\n\n Acesse o site faça o login.');
+			$this->email->message('Sua nova conta no Cursos Online está pronta. Acesse o site para fazer o login.');
 
 			$this->email->send();
 
@@ -138,8 +141,63 @@ class User extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+
+
     public function create()
     {
+
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		$this->load->model('profile_model');
+
+		$data['profiles'] = $this->profile_model->get_profile();
+		$data['duplicateUserMessage'] = 'Nome de usuário indisponível. Tente outro.';
+
+		$this->session->set_userdata('duplicateUserError', False);
+
+		$data['title'] = 'Cadastro de usuário';
+
+		$this->form_validation->set_rules('id_perfil', 'Perfil', 'required');
+		$this->form_validation->set_rules('nome', 'Nome', 'required');
+		$this->form_validation->set_rules('email', 'E-mail', 'required');
+
+		$this->load->view('templates/header', $data);
+
+		$allow_register = $this->user_model->allow_register();
+
+		if ($this->form_validation->run() === FALSE || !$allow_register)
+		{
+			if(!$allow_register){
+				$this->session->set_userdata('duplicateUserError', True);
+			}
+			$this->load->view('user/create');
+		}
+		else
+		{
+			$random_password = $this->random_password(4);
+			$this->user_model->set_user_by_admin($random_password);
+
+			$email = $this->input->post('email');
+
+			$id = $this->user_model->get_id_by_email($email);
+
+			$this->email->from('eng.rodrigo.palermo@gmail.com', 'Cursos Online Team');
+			$this->email->to($email);
+
+			$this->email->subject('Cursos Online - Nova conta');
+			$this->email->message('Esta conta foi criada pelo administrador do site.<br>
+ 									    Senha provisória: '.$random_password.PHP_EOL.'<br>
+				                       Faça login e altere esta senha provisória no menu de configurações da conta.');
+
+			$this->email->send();
+
+			redirect(base_url().'user/view');
+		}
+		$this->load->view('templates/footer');
+	}
+
+	public function edit($id)
+	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->model('profile_model');
@@ -151,32 +209,21 @@ class User extends CI_Controller
 		$this->session->set_userdata('duplicateUserError', False);
 		$this->session->set_userdata('passwordMismatchError', False);
 
-		$data['title'] = 'Cadastro de usuário';
+		$data['title'] = 'Atualização de cadastro';
+		$arrUserTemp = $this->user_model->get_users($id);
+		$data['user'] = $arrUserTemp[0];
 
-		$this->form_validation->set_rules('id_perfil', 'Perfil', 'required');
 		$this->form_validation->set_rules('nome', 'Nome', 'required');
-		$this->form_validation->set_rules('email', 'E-mail', 'required');
-		$this->form_validation->set_rules('senha', 'Senha', 'required', 'placeholder="Senha"');
-		$this->form_validation->set_rules('senha_repetida', 'Senha novamente', 'required', 'placeholder="Senha novamente"');
 
 		$this->load->view('templates/header', $data);
 
-		$allow_register = $this->user_model->allow_register();
-		$repeated_pass_match = $this->user_model->repeated_pass_match();
-
-		if ($this->form_validation->run() === FALSE || !$allow_register || !$repeated_pass_match)
+		if ($this->form_validation->run() === FALSE)
 		{
-			if(!$allow_register){
-				$this->session->set_userdata('duplicateUserError', True);
-			}
-			else if(!$repeated_pass_match){
-				$this->session->set_userdata('passwordMismatchError', True);
-			}
-			$this->load->view('user/create');
+			$this->load->view('user/edit', $data);
 		}
 		else
 		{
-			$this->user_model->set_user();
+			$this->user_model->update_user_attribute($id, 'nome', $data['nome']);
 			//$this->load->view('templates/success');
 			redirect(base_url().'user/view');
 		}

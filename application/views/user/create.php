@@ -7,11 +7,6 @@ if(isset($_SESSION['duplicateUserError']) and $_SESSION['duplicateUserError'] ==
 		<?= $duplicateUserMessage ?>
 	</div>
 	<?php
-} else if(isset($_SESSION['passwordMismatchError']) and $_SESSION['passwordMismatchError'] == True){?>
-	<div class="alert alert-warning">
-		<?=$passwordMismatchMessage?>
-	</div>
-	<?php
 } else {
 	echo validation_errors();
 }
@@ -32,13 +27,7 @@ if(isset($_SESSION['duplicateUserError']) and $_SESSION['duplicateUserError'] ==
 <div class="form-group">
 	<input type="input" class="form-control" name="nome" placeholder="Username" title="Username">
 </div>
-<div class="form-group">
-    <input type="password" class="form-control" name="senha" placeholder="Senha" title="Senha">
-</div>
-<div class="form-group">
-    <input type="password" class="form-control" name="senha_repetida" placeholder="Senha novamente" title="Senha novamente">
-</div>
-
+<p class="alert alert-warning">Uma senha aleatória será enviada por e-mail</p>
 <input class="btn btn-primary" type="submit" name="submit" value="Cadastrar">
 <a href="<?php echo $this->session->acao_origem; ?>" class="btn btn-secondary">Voltar</a>
 </form>

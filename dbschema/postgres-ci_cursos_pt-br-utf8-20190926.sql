@@ -1,4 +1,20 @@
-CREATE TABLE "ci_sessions" (
+-- -----------------------------------------------------
+-- Schema ci_cursos
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Database ci_cursos
+-- -----------------------------------------------------
+CREATE DATABASE ci_cursos
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
+
+-- -----------------------------------------------------
+-- Database ci_session - Sessao CodeIgniter/Heroku
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS "ci_sessions" (
                                "id" varchar(128) NOT NULL,
                                "ip_address" varchar(45) NOT NULL,
                                "timestamp" bigint DEFAULT 0 NOT NULL,
@@ -15,24 +31,10 @@ ALTER TABLE ci_sessions ADD PRIMARY KEY (id);
 -- To drop a previously created primary key (use when changing the setting)
 -- ALTER TABLE ci_sessions DROP PRIMARY KEY;
 
-
 -- -----------------------------------------------------
--- Schema ci_cursos
+-- Table public.perfil
 -- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Database ci_cursos
--- -----------------------------------------------------
-CREATE DATABASE ci_cursos
-    WITH
-    OWNER = postgres
-    ENCODING = 'UTF8'
-    CONNECTION LIMIT = -1;
-
--- -----------------------------------------------------
--- Table public.`perfil`
--- -----------------------------------------------------
-CREATE TABLE public.perfil
+CREATE TABLE IF NOT EXISTS public.perfil
 (
     id serial NOT NULL,
     nome character varying(100) NOT NULL,
@@ -47,27 +49,9 @@ ALTER TABLE public.perfil
 
 
 -- -----------------------------------------------------
--- Table public.`usuario`
+-- Table public.usuario
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS public.`usuario` (
-  id INT NOT NULL AUTO_INCREMENT,
-  id_perfil INT NOT NULL,
-  email character varying(40) NOT NULL,
-  senha character varying(20) NOT NULL,
-  nome character varying(100) NOT NULL,
-  dth_inscricao timestamp without time zone,
-  imagem character varying(100) NULL DEFAULT NULL,
-  PRIMARY KEY (id),
-  INDEX fk_usuario_perfil (id_perfil ASC), -- VISIBLE
-  CONSTRAINT fk_usuario_perfil
-    FOREIGN KEY (id_perfil)
-    REFERENCES public.`perfil` (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-CREATE TABLE public.usuario
+CREATE TABLE IF NOT EXISTS public.usuario
 (
     id serial NOT NULL,
     id_perfil integer NOT NULL,
@@ -90,95 +74,114 @@ ALTER TABLE public.usuario
     OWNER to postgres;
 
 -- -----------------------------------------------------
--- Table public.`categoria`
+-- Table public.categoria
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS public.`categoria` (
-  id INT NOT NULL AUTO_INCREMENT,
-  nome character varying(45) NOT NULL,
-  descricao character varying(100) NOT NULL,
-  PRIMARY KEY (id))
-ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS public.categoria
+(
+    id serial NOT NULL,
+    nome character varying(45) NOT NULL,
+    descricao character varying(100) NOT NULL,
+    PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
 
+ALTER TABLE public.categoria
+    OWNER to postgres;
 
 -- -----------------------------------------------------
 -- Table public.curso
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS public.curso (
-  id INT NOT NULL AUTO_INCREMENT,
-  id_categoria INT NOT NULL,
-  nome character varying(45) NOT NULL,
-  descricao character varying(100) NOT NULL,
-  `dth_criacao` DATETIME NULL DEFAULT NULL,
-  PRIMARY KEY (id),
-  INDEX `fk_curso_categoria` (id_categoria ASC), -- VISIBLE
-  CONSTRAINT `fk_curso_categoria`
-    FOREIGN KEY (id_categoria)
-    REFERENCES public.`categoria` (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS public.curso
+(
+    id serial NOT NULL,
+    id_categoria integer NOT NULL,
+    nome character varying(45) NOT NULL,
+    descricao character varying(100) NOT NULL,
+    dth_criacao timestamp without time zone,
+    imagem character varying(100) NULL DEFAULT NULL,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_curso_categoria FOREIGN KEY (id_categoria)
+        REFERENCES public.categoria (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+);
 
-
--- -----------------------------------------------------
--- Table public.`topico`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS public.`topico` (
-  id INT NOT NULL AUTO_INCREMENT,
-  `id_curso` INT NOT NULL,
-  nome character varying(45) NOT NULL,
-  `conteudo` character varying(2000) NOT NULL,
-  PRIMARY KEY (id),
-  INDEX `fk_topico_curso` (`id_curso` ASC), -- VISIBLE
-  CONSTRAINT `fk_topico_curso`
-    FOREIGN KEY (`id_curso`)
-    REFERENCES public.curso (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
+ALTER TABLE public.curso
+    OWNER to postgres;
 
 -- -----------------------------------------------------
--- Table public.`turma`
+-- Table public.conteudo
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS public.`turma` (
-  id INT NOT NULL AUTO_INCREMENT,
-  `id_professor` INT NULL,
-  `id_aluno` INT NULL,
-  `curso_id` INT NOT NULL,
-  PRIMARY KEY (id),
-  INDEX `fk_turma_curso1_idx` (`curso_id` ASC), -- VISIBLE
-  CONSTRAINT `fk_turma_curso1`
-    FOREIGN KEY (`curso_id`)
-    REFERENCES public.curso (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS public.conteudo
+(
+    id serial NOT NULL,
+    id_curso integer NOT NULL,
+    nome character varying(45) NOT NULL,
+    descricao character varying(2000) NOT NULL,
+    dth_criacao timestamp without time zone,
+    imagem character varying(100) NULL DEFAULT NULL,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_conteudo_curso FOREIGN KEY (id_curso)
+        REFERENCES public.curso (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+);
 
+ALTER TABLE public.conteudo
+    OWNER to postgres;
+-- -----------------------------------------------------
+-- Table public.turma
+-- -----------------------------------------------------
+CREATE TABLE public.turma
+(
+    id serial NOT NULL,
+    id_curso integer NOT NULL,
+    nome character varying(45) NOT NULL,
+    descricao character varying(2000) NOT NULL,
+    dth_criacao timestamp without time zone,
+    imagem character varying(100) NULL DEFAULT NULL,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_turma_curso FOREIGN KEY (id_curso)
+        REFERENCES public.curso (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE public.turma
+    OWNER to postgres;
 
 -- -----------------------------------------------------
--- Table public.`turma_has_usuario`
+-- Table public.turma_tem_usuario
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS public.`turma_has_usuario` (
-  `turma_id` INT NOT NULL,
-  `usuario_id` INT NOT NULL,
-  PRIMARY KEY (`turma_id`, `usuario_id`),
-  INDEX `fk_turma_has_usuario_usuario1_idx` (`usuario_id` ASC), -- VISIBLE
-  INDEX `fk_turma_has_usuario_turma1_idx` (`turma_id` ASC), -- VISIBLE
-  CONSTRAINT `fk_turma_has_usuario_turma1`
-    FOREIGN KEY (`turma_id`)
-    REFERENCES public.`turma` (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_turma_has_usuario_usuario1`
-    FOREIGN KEY (`usuario_id`)
-    REFERENCES public.`usuario` (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE public.turma_tem_usuario
+(
+    -- id serial NOT NULL,
+    id_turma integer NOT NULL,
+    id_usuario integer NOT NULL,
+    PRIMARY KEY (id_turma, id_usuario),
+    CONSTRAINT fk_turma_has_usuario_turma FOREIGN KEY (id_turma)
+        REFERENCES public.turma (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk_turma_has_usuario_usuario FOREIGN KEY (id_usuario)
+        REFERENCES public.usuario (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+);
 
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+ALTER TABLE public.turma_tem_usuario
+    OWNER to postgres;

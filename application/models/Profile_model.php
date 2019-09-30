@@ -18,12 +18,11 @@ class Profile_model extends CI_Model
             'nome' => $this->input->post('nome'),
         );
 
-        if($id){
-        	$this->db->where('id',$id);
-        	return $this->db->update($this->table, $data);
-		} else {
-			return $this->db->insert($this->table, $data);
+        if($id) {
+			$this->db->where('id', $id);
+			return $this->db->update($this->table, $data);
 		}
+        return $this->db->insert($this->table, $data);
     }
 
     public function get_profile($id = false)
