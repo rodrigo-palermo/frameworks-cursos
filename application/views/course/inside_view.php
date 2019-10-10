@@ -1,6 +1,4 @@
-<h2><?php echo $title; ?></h2>
-<a href="<?php echo base_url().'course/create'; ?>" class="btn btn-outline-primary" title="Adicionar"><i class="material-icons">add</i></a>
-	<table class='table'>
+<table class='table'>
     <thead>
         <tr>
             <th>id</th>
@@ -26,5 +24,3 @@
     }?>
     </tbody>
 </table>
-
-<a href="<?php echo $this->session->acao_origem; ?>" class="btn btn-secondary">Voltar</a>

@@ -49,6 +49,7 @@
 				?>
 			</div>
 		</li>
+		<div><?php echo $course_view;?></div>
 	</ul>
 </div>
 

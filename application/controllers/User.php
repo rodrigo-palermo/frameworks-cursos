@@ -22,7 +22,7 @@ class User extends CI_Controller
 			$this->load->view('templates/header', $data);
 			$this->load->view('user/view');
 			$this->load->view('templates/footer');
-		}
+		} else
 		redirect(base_url());
 
 	}
@@ -36,10 +36,16 @@ class User extends CI_Controller
 
 	public function account()
 	{
+		#todo: redirecionar para pagina conforme Perfil
+		#todo: em outros controllers, ao criar, redirecionar para account ou outra página, e não account do ADMIN
 		$id = $this->session->usuario_id;
 
+		$this->load->model('course_model');
+		$data2['course'] = $this->course_model->get_course_by_id_user_created($id);
+
 		$data['title'] = 'Gerenciador de conta';
-		$data['user'] =$this->user_model->get_users($id)[0];
+		$data['user'] = $this->user_model->get_users($id)[0];
+		$data['course_view'] = $this->load->view('course/inside_view', $data2, True);
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('user/account');

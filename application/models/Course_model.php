@@ -16,6 +16,7 @@ class Course_model extends CI_Model
 
         $data = array(
 			'id_categoria' => $this->input->post('id_categoria'),
+			'id_usuario_criacao' => $this->input->post('usuario_id'),
             'nome' => $this->input->post('nome'),
             'descricao' => $this->input->post('descricao')
         );
@@ -32,9 +33,21 @@ class Course_model extends CI_Model
 		if($id){
 			$this->db->where('curso.id',$id);
 		}
-		$this->db->select('curso.*, categoria.nome categoria_nome');
+		$this->db->select('curso.*, categoria.nome categoria_nome, usuario.nome usuario_nome');
 		$this->db->from('curso');
 		$this->db->join('categoria','curso.id_categoria = categoria.id');
+		$this->db->join('usuario','curso.id_usuario_criacao = usuario.id');
+		$query = $this->db->get();
+		return $query->result_array();
+    }
+
+    public function get_course_by_id_user_created($id_user)
+    {
+		$this->db->select('curso.*, categoria.nome categoria_nome, usuario.nome usuario_nome');
+		$this->db->from('curso');
+		$this->db->join('categoria','curso.id_categoria = categoria.id');
+		$this->db->join('usuario','curso.id_usuario_criacao = usuario.id');
+		$this->db->where('curso.id_usuario_criacao ='. $id_user);
 		$query = $this->db->get();
 		return $query->result_array();
     }

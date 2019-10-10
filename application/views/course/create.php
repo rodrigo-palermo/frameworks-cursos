@@ -21,6 +21,7 @@
 </div>
 
 <input type="hidden" name="hdnId" value="<?=isset($course)?$course['id']:'';?>">
+<input type="hidden" name="usuario_id" value="<?php echo $this->session->usuario_id;?>">
 <input class="btn btn-primary" type="submit" name="submit" value="<?=isset($course)?'Atualizar':'Cadastrar';?>">
 <a href="<?php echo $this->session->acao_origem; ?>" class="btn btn-secondary">Voltar</a>
 </form>
