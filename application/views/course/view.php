@@ -3,7 +3,7 @@
 	<table class='table'>
     <thead>
         <tr>
-            <th>id</th>
+<!--            <th>id</th>-->
             <th>Curso</th>
             <th>Professor</th>
 			<th>Categoria</th>
@@ -14,7 +14,7 @@
     <tbody>
     <?php foreach($course as $course_item) {
         echo '<tr>'.PHP_EOL;
-        echo '<td>'.$course_item['id'].'</td>'.PHP_EOL;
+//        echo '<td>'.$course_item['id'].'</td>'.PHP_EOL;
         echo '<td>'.$course_item['nome'].'</td>'.PHP_EOL;
 		echo '<td>'.$course_item['usuario_nome'].'</td>'.PHP_EOL;
 		echo '<td>'.$course_item['categoria_nome'].'</td>'.PHP_EOL;

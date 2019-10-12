@@ -1,4 +1,8 @@
 /*Cursos Online - Other style configs*/
+.material-icons.md-18 { font-size: 18px; }
+
+.btn.transp { border: 0px transparent;}
+
 body, html {
 	height: 100%;
 }

@@ -1,3 +1,10 @@
+<h5 class="list-group-item-title">Cursos inscritos</h5>
+<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+	<h6>Cursos</h6>
+	<div class="btn-group">
+	<?php echo anchor('course/search','Procurar','class="btn btn-outline-primary" disabled');?>
+	</div>
+</li>
 <table class='table'>
     <thead>
         <tr>

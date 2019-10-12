@@ -39,6 +39,15 @@ class Content_model extends CI_Model
 		return $query->result_array();
     }
 
+	public function get_content_by_id_course($id_course)
+	{
+		$this->db->select('conteudo.*');
+		$this->db->from('conteudo');
+		$this->db->where('conteudo.id_curso',$id_course);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
     public function delete_content($id)
 	{
 		$this->db->where('id',$id);

@@ -1,5 +1,3 @@
-<h1>Gerenciador de Cursos Online</h1>
-<h2>Administrador</h2>
 <div style="max-width:600px;">
 	<ul class="list-group">
 		<h5 class="list-group-item-title">Itens de Usuários</h5>
@@ -17,7 +15,7 @@
 				<?php echo anchor('user/view','Lista','class="btn btn-outline-primary"')?>
 			</div>
 		</li>
-		<h5 class="list-group-item-title">Itens de cursos</h5>
+		<h5 class="list-group-item-title">Itens de Cursos</h5>
 		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
 			<h6>Categorias</h6>
 			<div class="btn-group">

@@ -39,13 +39,33 @@ class User extends CI_Controller
 		#todo: redirecionar para pagina conforme Perfil
 		#todo: em outros controllers, ao criar, redirecionar para account ou outra página, e não account do ADMIN
 		$id = $this->session->usuario_id;
+		$perfil = $this->session->usuario_perfil;
 
-		$this->load->model('course_model');
-		$data2['course'] = $this->course_model->get_course_by_id_user_created($id);
 
-		$data['title'] = 'Gerenciador de conta';
+		if ($perfil == 'Administrador') {
+			$data['inside_view'] = $this->load->view('user/inside_account_admin', '', True);
+		}
+		if ($perfil == 'Professor') {
+			$this->load->model('course_model');
+			$this->load->model('content_model');
+			$arrContent = $this->content_model->get_content();
+
+
+			$data_inside['course'] = $this->course_model->get_course_by_id_user_created($id);
+			$data_inside['content'] = $arrContent;
+			$data['course_inside_view'] = $this->load->view('course/inside_view_teacher', $data_inside, True);
+
+
+		}
+		if ($perfil == 'Aluno') {
+			$this->load->model('course_model');
+			$data_inside['course'] = $this->course_model->get_course_by_id_user_created($id);
+			$data['inside_view'] = $this->load->view('course/inside_view_student', $data_inside, True);
+		}
+
+
+		$data['title'] = 'Gerenciador de conta - '.$perfil;
 		$data['user'] = $this->user_model->get_users($id)[0];
-		$data['course_view'] = $this->load->view('course/inside_view', $data2, True);
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('user/account');

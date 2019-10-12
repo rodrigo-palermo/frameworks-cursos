@@ -30,7 +30,7 @@
 					if (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] == True && isset($_SESSION['usuario_perfil']) && $_SESSION['usuario_perfil'] == 'Administrador') {
 						$navItemAdmin = '<li class="nav-item">' . PHP_EOL;
 //						$navItemAdmin .= '<a class="nav-link" href="#">Administrador</a>' . PHP_EOL;
-						$navItemAdmin .=  anchor(base_url(), $this->session->usuario_nome, 'class="btn btn-outline-info"') . PHP_EOL;
+						$navItemAdmin .=  anchor('user/account', $this->session->usuario_nome, 'class="btn btn-outline-info"') . PHP_EOL;
 						$navItemAdmin .= '</li>' . PHP_EOL;
 						print $navItemAdmin;
 					}
@@ -93,5 +93,5 @@
 				$_SESSION['acao_atual'] = current_url();
 			}
 			//Enable CI Profiler in all pages
-			$this->output->enable_profiler(TRUE);
+			(ENVIRONMENT === 'development') ? $this->output->enable_profiler(TRUE):'';
 			?>

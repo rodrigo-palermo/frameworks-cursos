@@ -38,18 +38,8 @@
 			</div>
 		</li>
 
-		<h5 class="list-group-item-title">Cursos</h5>
-		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-			<h6>Cursos</h6>
-			<div class="btn-group">
-				<?php if($this->session->usuario_perfil == 'Professor')
-								echo anchor('course/create','Adicionar','class="btn btn-outline-primary" disabled');
-				           else
-							   echo anchor('course/search','Procurar','class="btn btn-outline-primary" disabled');
-				?>
-			</div>
-		</li>
-		<div><?php echo $course_view;?></div>
+		<div><?php echo $course_inside_view;?></div>
+
 	</ul>
 </div>
 

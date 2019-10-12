@@ -2,7 +2,7 @@
 </div>
 	<?php $_SESSION['acao_atual'] = current_url();?>
 </main>
-<footer class="footer fixed-bottom bg-dark ">
+<footer class="footer bg-dark ">
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">
         <span class="text-muted">&copy; Rodrigo Palermo, 2019
