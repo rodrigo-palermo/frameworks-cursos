@@ -38,7 +38,7 @@
 		<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
 			<h6>Conteúdo</h6>
 			<div class="btn-group">
-				<?php echo anchor('content/create','Adicionar','class="btn btn-outline-primary btn-sm" disabled');?>
+				<?php echo anchor('content/create_on_course/'.$course_item['id'],'Adicionar','class="btn btn-outline-primary btn-sm" disabled');?>
 			</div>
 		</li>
 		<table class='table table-sm'>

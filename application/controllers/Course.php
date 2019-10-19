@@ -24,8 +24,7 @@ class Course extends CI_Controller {
 
         if($id){
 			$data['title'] = 'Atualização de curso';
-			$arrCourseTemp = $this->course_model->get_course($id);
-			$data['course'] = $arrCourseTemp[0];
+			$data['course'] = $this->course_model->get_course($id);
 		} else {
 			$data['title'] = 'Cadastro de curso';
 		}
@@ -42,17 +41,21 @@ class Course extends CI_Controller {
         {
             $this->course_model->set_course($id);
             //$this->load->view('templates/success');
-			redirect(base_url().'course/view');
+			redirect(base_url().'user/account');
         }
 		$this->load->view('templates/footer');
     }
 
-    public function view()
+    public function view($id = null)
     {
         $data['title'] = 'Lista de curso';
-        $data['course'] = $this->course_model->get_course();
 
-        $this->load->view('templates/header', $data);        
+        if($id)
+			$data['course'] = $this->course_model->get_course($id);
+        else
+        	$data['course'] = $this->course_model->get_course();
+
+        $this->load->view('templates/header', $data);
         $this->load->view('course/view');
         $this->load->view('templates/footer');
     }
@@ -60,7 +63,7 @@ class Course extends CI_Controller {
     public function delete($id)
 	{
 		$this->course_model->delete_course($id);
-		redirect(base_url().'course/view');
+		redirect(base_url().'user/account');
 	}
 
 }

@@ -38,7 +38,7 @@
 			</div>
 		</li>
 
-		<div><?php echo $course_inside_view;?></div>
+		<div><?php echo $inside_view;?></div>
 
 	</ul>
 </div>

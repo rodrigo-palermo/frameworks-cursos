@@ -53,7 +53,7 @@ class User extends CI_Controller
 
 			$data_inside['course'] = $this->course_model->get_course_by_id_user_created($id);
 			$data_inside['content'] = $arrContent;
-			$data['course_inside_view'] = $this->load->view('course/inside_view_teacher', $data_inside, True);
+			$data['inside_view'] = $this->load->view('course/inside_view_teacher', $data_inside, True);
 
 
 		}

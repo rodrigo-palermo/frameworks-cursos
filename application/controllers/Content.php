@@ -46,6 +46,37 @@ class Content extends CI_Controller {
         }
 		$this->load->view('templates/footer');
     }
+	public function create_on_course($id_curso)
+	{
+
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		$this->load->model('course_model');
+
+		$data['course'] = $this->course_model->get_course($id_curso);
+
+		$data['tableName'] = 'Conteudo';
+
+		$data['title'] = 'Criação de conteúdo';
+
+		$this->form_validation->set_rules('id_curso', 'Curso', 'required');
+		$this->form_validation->set_rules('nome', 'Nome', 'required');
+		$this->form_validation->set_rules('descricao', 'Descrição', 'required');
+
+		$this->load->view('templates/header', $data);
+		if ($this->form_validation->run() === FALSE)
+		{
+			$this->load->view('content/create_on_course', $data);
+		}
+		else
+		{
+			$this->content_model->set_content();
+			//$this->load->view('templates/success');
+			redirect(base_url().'user/account');
+		}
+		$this->load->view('templates/footer');
+	}
+
 
     public function view()
     {
@@ -60,7 +91,7 @@ class Content extends CI_Controller {
     public function delete($id)
 	{
 		$this->content_model->delete_content($id);
-		redirect(base_url().'content/view');
+		redirect(base_url().'user/account');
 	}
 
 }
