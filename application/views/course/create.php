@@ -19,6 +19,10 @@
 	<!--    <label for="descricao">Descrição</label>-->
 	<input type="input" class="form-control"  name="descricao" placeholder="Descrição" value="<?=isset($course)?$course['descricao']:'';?>">
 </div>
+<div class="form-group">
+	<!--    <label for="descricao">Imagem</label>-->
+	<input type="input" class="form-control"  name="imagem" placeholder="Imagem" value="<?=isset($course)?$course['imagem']:'';?>">
+</div>
 
 <input type="hidden" name="hdnId" value="<?=isset($course)?$course['id']:'';?>">
 <input type="hidden" name="usuario_id" value="<?php echo $this->session->usuario_id;?>">
