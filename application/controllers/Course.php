@@ -31,6 +31,7 @@ class Course extends CI_Controller {
 		$this->form_validation->set_rules('id_categoria', 'Categoria', 'required');
         $this->form_validation->set_rules('nome', 'Nome', 'required');
         $this->form_validation->set_rules('descricao', 'Descrição', 'required');
+        $this->form_validation->set_rules('imagem', 'Imagem');
 
 		$this->load->view('templates/header', $data);
         if ($this->form_validation->run() === FALSE)
